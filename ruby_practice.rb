@@ -27,5 +27,12 @@ def speak
   accents
 end
 
+def speak_more
+
+  new_accent = speak.map {|accent| "native " + accent}
+end
+
 puts creole = Language.new("Creole")
-puts speak()
+puts speak_more
+speak.volume = "loud"
+puts speak.volume
