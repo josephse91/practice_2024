@@ -1,5 +1,5 @@
 
-const cArr = (max = 30,min = 5) => {
+const cArr = (max = 1000,min = 100) => {
     var upperLength = Math.floor(Math.random() * max)
     var lowerLength = Math.floor(Math.random() * min)
     
@@ -24,11 +24,15 @@ const totalTime = (array,label) => {
 // totalTime(createArray(20), "Create Array")
 
 const sortTime = (sortfuncs) => {
+    var arr1 = cArr()
     for (sort in sortfuncs) {
         let sortType = sortfuncs[sort]
         console.time(sort)
-        let arr = sortType(cArr())
+        // let start = performance.now();
+        let arr = sortType(arr1)
+        // let end = performance.now()
         console.timeEnd(sort)
+        // console.log("execution time: ",end - start, "ms \n",sort,": ", arr)
         console.log(sort,": ", arr)
     }
     
@@ -56,10 +60,31 @@ const bubbleSort = array => {
     return array
 }
 
+const selectionSort = array => {
+    var min = array[0];
+    let idx = 0, swaps = 0;
+
+    for(let bottom = 0; bottom < array.length - 1; bottom++) {
+        idx = bottom;
+        for(let i=bottom; i < array.length; i++) { 
+            if(array[i] <= min) {
+                min = array[i];
+                idx = i
+            }
+        }
+        array[bottom], array[idx] = array[idx], array[bottom];
+        swaps++
+    }
+    
+    console.log("number of swaps: ", swaps)
+    return array
+}
+
 var sorts = {
     bubblesort1: bubbleSort,
     bubblesort2: bubbleSort,
-    bubblesort3: bubbleSort
+    bubblesort3: bubbleSort,
+    selectionSort1: selectionSort,
 }
 
 sortTime(sorts);
