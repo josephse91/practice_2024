@@ -80,11 +80,31 @@ const selectionSort = array => {
     return array
 }
 
+const insertionSort = array => {
+    var swaps = 0;
+
+    for(let i = 0; i < array.length - 1; i++) {
+        for(let j = i - 1; j >= 0; j--) {
+            if(j < 0) break
+
+            var target = i
+            if(array[target] >= array[j]) {
+                array[i], array[j] = array[j],array[i];
+                swaps++;
+                target--;
+            } else break 
+        }
+    }
+    console.log("Insertion Sort Swaps: ", swaps)
+    return array;
+}
+
 var sorts = {
     bubblesort1: bubbleSort,
     bubblesort2: bubbleSort,
     bubblesort3: bubbleSort,
     selectionSort1: selectionSort,
+    insertionSort1: insertionSort
 }
 
 sortTime(sorts);
