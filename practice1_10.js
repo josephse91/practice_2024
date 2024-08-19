@@ -1,27 +1,23 @@
-function practice() {
-    return "anonymous function"
-}
+var arr1 = [38,25,74,1,76,24,9,35,244,64,55]
 
-const practice2 = function() {
+const binarySearch = (array,target,low = 0,high = array.length - 1) => {
+    if (array[low] > target || array[high] < target) return false
+    
+    var midIdx = Math.floor(((high - low) / 2)) + low;
+    if (array[midIdx] === target) return true;
+    if (low > high) return false;
 
-    let v1 = "outer variable"
-    function inner() {
-        let v2 = "inner variable"
-        return [v1,v2]
+    //console.log(low,high,array[low],array[high],array, midIdx)
+    if (target > array[midIdx]) {
+        return binarySearch(array,target,midIdx + 1, high);
+    } else {
+        return binarySearch(array,target,low,midIdx - 1);
     }
-
-    return [inner(), v1,v2]
 }
 
-const p2 = function() {
 
-    let v1 = "outer variable"
-    const inner = () => v2 = "inner variable"
+let sortedArr = arr1.sort((a,b) => {
+    return a-b
+})
 
-    return [inner(), v1,v2]
-}
-
-const practice3 = () => {
-    return "fat arrow function method"
-}
-console.log(practice2())
+console.log(binarySearch(sortedArr,1))
